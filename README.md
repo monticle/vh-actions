@@ -1,30 +1,30 @@
-# v2ray-heroku
+# vh-actions
 
 > ~~貌似新建的app有些需要科学访问~~，如果需要，请使用cloudflare worker CDN 或者 cloudflare tunnel 套一层。
 
 > 切换到最新的 VLESS 协议。具体客户端配置请看 config 章节。
 
-> v2ray-heroku 是我为了体验 github action 的产物，也是我的主力 backup，我会日常维护它。加入或者修改一些我认为好的配置。但这一般会导致客户端配置需要些许修改。 不过具体配置都会体现在 [详细 VLESS websocket 客户端配置](#vless-websocket-客户端配置)
+> vh 是我为了体验 github action 的产物，也是我的主力 backup，我会日常维护它。加入或者修改一些我认为好的配置。但这一般会导致客户端配置需要些许修改。 不过具体配置都会体现在 [详细 VLESS websocket 客户端配置](#vless-websocket-客户端配置)
 
 > 有问题请开 issue 或者 discussions。
 
-首先查看别人的 [youtube 教程](https://www.youtube.com/watch?v=xHZyDsFYdvA)，了解怎么配置 v2ray-heroku。**本项目使用最新 VLESS 协议，请在客户端配置选择 VLESS**。  
+首先查看别人的 [youtube 教程](https://www.youtube.com/watch?v=xHZyDsFYdvA)，了解怎么配置 vh。**本项目使用最新 VLESS 协议，请在客户端配置选择 VLESS**。  
 [详细 VLESS websocket 客户端配置](#vless-websocket-客户端配置) 。
 
-如果你还想自动化你的 heroku，请查看下面的教程。
+如果你还想自动化你的 h，请查看下面的教程。
 
 本项目是包含，
 
-- 一键部署 V2ray 到 heroku。
+- 一键部署 v 到 h。
 - 利用 Github action 实现 [重新部署](#重新部署)/[停止](#停止)/[启动](#启动)/[删除](#删除)。
-- 支持 heroku 的区域（us 和 eu）
+- 支持 h 的区域（us 和 eu）
 - **支持[多app和多账户](#使用-environments-实现-多账户多app-secrets-管理) [重新部署](#重新部署)/[停止](#停止)/[启动](#启动)/[删除](#删除)。**
 
 - 利用 cloudflare CDN 进行加速。
 - **利用 [cloudflare tunnel](https://www.cloudflare.com/products/tunnel/) 进行加速。**
 
 ```text
-项目Dockerfile是基于V2fly 官方镜像制作。仅仅增加生产配置文件的脚本。重新部署就可以更新到最新的v2ray。
+项目Dockerfile是基于V2fly 官方镜像制作。仅仅增加生产配置文件的脚本。重新部署就可以更新到最新的v。
 基于官方镜像，这也是v2fly 推荐的做法。
 ```
 
@@ -34,7 +34,7 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-> 貌似在这个 repo 下 点击 一键部署貌似heroku 提示违反某些原则，但是action 正常工作！！建议 fork 时候，项目名字，尽量不要带有 v2ray 关键字。
+> 貌似在这个 repo 下 点击 一键部署貌似h 提示违反某些原则，但是action 正常工作！！建议 fork 时候，项目名字，尽量不要带有 v 关键字。
 
 ## Github Actions 管理
 
@@ -44,17 +44,17 @@
 
 | Name              | Description                                |
 | ----------------- | ------------------------------------------ |
-| APP_NAME          | 就是你 heroku 项目的名字. 如果你是第一次创建APP，**请确保名字是唯一的**|
-| EMAIL             | heroku 账户的 email                      |
-| HEROKU_API_KEY    | heroku API key，在 account 设置下可以找到 |
+| APP_NAME          | 就是你 h 项目的名字. 如果你是第一次创建APP，**请确保名字是唯一的**|
+| EMAIL             | h 账户的 email                      |
+| HEROKU_API_KEY    | h API key，在 account 设置下可以找到 |
 | HEROKU_V2RAY_UUID | V2rayUUID                                |
 | HEROKU_TUNNEL_TOKEN | **可选** cloudflare tunnel 的 token    |
 
-> 这样Token一定必须是大写。。请在 heroku 网站创建app，来确保项目的名字的唯一性。
+> 这样Token一定必须是大写。。请在 h 网站创建app，来确保项目的名字的唯一性。
 
 HEROKU_TUNNEL_TOKEN 是可选项，可以忽略. 详细说明，请查看章节 《建立-cloudflare-tunnel-（可选）》
 
-> 请务必生成新的 UUID。使用已有的 UUID 会使自己 V2ray 暴露在危险之下。
+> 请务必生成新的 UUID。使用已有的 UUID 会使自己 v 暴露在危险之下。
 
 
 PowerShell:
@@ -79,12 +79,12 @@ xxx@xxx:/mnt/c/Users/$ uuidgen
 
 ![Secrets](./readme-data/GithubSecrets.gif)
 
-### Heroku API key
+### h API key
 
 路径
 
 ```text
-heroku Account settings-->API key
+h Account settings-->API key
 ```
 
 ![Secrets](./readme-data/herokuapikey.gif)
@@ -132,7 +132,7 @@ Actions
 ```javascript
 addEventListener("fetch", (event) => {
   let url = new URL(event.request.url);
-  url.hostname = "你的heroku的hostname";
+  url.hostname = "h的hostname";
   let request = new Request(url, event.request);
   event.respondWith(fetch(request));
 });
@@ -193,10 +193,10 @@ https://github.com/badafans/better-cloudflare-ip
     ]
 ```
 
-### v2rayN
+### v
 
-换成 [V2rayN](https://github.com/2dust/v2rayN)
+换成 [v](https://github.com/2dust/v2rayN)
 
 别人的配置教程参考，https://v2raytech.com/v2rayn-config-tutorial/.
 
-![v2rayN](/readme-data/V2rayN.jpg)
+![v](/readme-data/V2rayN.jpg)
